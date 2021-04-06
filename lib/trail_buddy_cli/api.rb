@@ -19,14 +19,11 @@ class API
             trail["country"] == "United States"
         end 
         
-        state = united_states_trails.select do |trail|
-            binding.pry 
-            trail["state"] == "Arkansas"
+        united_states_trails.each do |trail|
+            Trail.new(trail)
         end 
-        
-        city = state.select do |trail|
  
-        end 
+        binding.pry 
 
         #for weeding out hiking trails
         # trail["activities"].select{|trail| trail["activity_type_name"] == "hiking"}
