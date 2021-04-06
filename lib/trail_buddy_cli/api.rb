@@ -1,7 +1,7 @@
 class API 
 
     def self.get_data
-        url = URI("https://trailapi-trailapi.p.rapidapi.com/?q-activities_activity_type_name_eq=hiking&q-country_cont=United%20States%20&limit=1200")
+        url = URI("https://trailapi-trailapi.p.rapidapi.com/?limit=1200")
 
         http = Net::HTTP.new(url.host, url.port)
         http.use_ssl = true
@@ -19,8 +19,9 @@ class API
             trail["country"] == "United States"
         end 
         
-        united_states_trails.each do |trail|
-            Trail.new(trail)
+        united_states_trails.each do |area|
+            binding.pry 
+            Area.new(area)
         end 
  
         binding.pry 
