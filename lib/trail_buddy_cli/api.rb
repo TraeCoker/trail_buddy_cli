@@ -20,11 +20,11 @@ class API
         end 
         
         united_states_trails.each do |area|
-            binding.pry 
+
             Area.new(area)
         end 
  
-        binding.pry 
+
 
         #for weeding out hiking trails
         # trail["activities"].select{|trail| trail["activity_type_name"] == "hiking"}
