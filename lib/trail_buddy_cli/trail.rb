@@ -1,10 +1,10 @@
 class Trail 
-  attr_accessor :name, :city, :state 
+  attr_accessor :state, :name, :location, :length, :time_estimate, :difficulty, :link 
   @@all =[]
 
     def initialize(trail_hash)
         trail_hash.each do |key, value|
-            self.send("#{key}=", value) if self.respond_to?("#{key}")
+            self.send("#{key}=", value)
         end 
         save 
     end 

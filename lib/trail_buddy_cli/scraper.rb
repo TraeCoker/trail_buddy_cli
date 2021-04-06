@@ -14,11 +14,9 @@ class Scraper
                 :time_estimate => trail.css("span.xlate-none").last.text,
                 :difficulty => trail.css(".styles-module__selected___3fawg").text,
                 :link => "https://www.alltrails.com" + relative_path }
-                
-
-            #binding.pry 
-
-        end 
+                Trail.new(trail_hash)
+            end 
+            binding.pry 
     end 
 
 
