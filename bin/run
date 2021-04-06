@@ -3,7 +3,7 @@
 require_relative '../lib/environment.rb'
 
 
-Scraper.get_data_by_state("missouri")
+CLI.new.start 
 
 
 
