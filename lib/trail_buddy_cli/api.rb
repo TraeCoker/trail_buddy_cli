@@ -15,6 +15,18 @@ class API
         response = http.request(request)
         array = JSON.parse(response.read_body)["places"]
 
+        united_states_trails = array.select do |trail| 
+            trail["country"] == "United States"
+        end 
+        
+        state = united_states_trails.select do |trail|
+            trail["state"] == "Arkansas"
+        end 
+        
+        city = state.select do |trail|
+            binding.pry 
+        end 
+
     end 
 
 

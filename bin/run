@@ -2,7 +2,7 @@
 
 require_relative '../lib/environment.rb'
 
-
+API.get_data
 
 
 
