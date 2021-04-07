@@ -76,7 +76,20 @@ class CLI
 
     def more_trail_info(input)
         trail = Trail.select_by_state(current_state)[input -1]
-        binding.pry 
+        puts "             "
+        puts "                         "
+        puts "#{trail.name} - #{trail.location}, #{current_state}"
+        puts "#{trail.length} - #{trail.time_estimate}"
+        puts "Difficulty: #{trail.difficulty}"
+        puts "Elevation gain: #{trail.elevation_gain}"
+        puts "route type: #{trail.route_type}"
+        puts "---------------------------------------------------"
+        puts "#{trail.description}"
+        puts "---------------------------------------------------"
+        puts "                                               "
+        puts "Facilities: #{trail.facilities}"
+        puts "                                 "
+        puts "Contact: #{trail.contact}"
 
 
     end 
