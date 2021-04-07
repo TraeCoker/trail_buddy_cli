@@ -17,6 +17,10 @@ class Trail
         @@all
     end 
 
+    def self.select_by_state(state)
+        all.select{|trail| trail.state == state}
+    end 
+
 
 
 end 

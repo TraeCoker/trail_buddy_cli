@@ -1,5 +1,6 @@
 class Scraper 
 
+
     def self.get_data_by_state(state)
         url = URI.parse("https://www.alltrails.com/us/#{state}")
         response = Net::HTTP.get(url)
@@ -16,8 +17,9 @@ class Scraper
                 :link => "https://www.alltrails.com" + relative_path }
                 Trail.new(trail_hash)
             end 
-            binding.pry 
     end 
+
+
 
 
 
