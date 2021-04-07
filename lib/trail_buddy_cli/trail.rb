@@ -7,7 +7,6 @@ class Trail
         trail_hash.each do |key, value|
             self.send("#{key}=", value)
         end 
-        #binding.pry 
         add_additional_attributes(Scraper.get_individual_trail_data(link))
         save 
     end 

@@ -38,10 +38,23 @@ class CLI
 
     def print_state_trails(state)
         state = state.split("-").map{|word| word.capitalize}.join(" ")
+        puts "                                                  "
         puts "Here are the top rated hiking trails for #{state}:"
+        puts "--------------------------------------------------"
         Trail.select_by_state(state).each_with_index do |trail, index|
-        puts "#{index + 1}. #{trail.name}"
+        puts "#{index + 1}. #{trail.name} - #{trail.location}"
+        puts "                           "
+        puts "#{trail.overview}"
+        puts "Total time is #{trail.time_estimate}"
+        puts "                           "
         end 
+        puts "--------------------------------------------------"
+        puts "For more information on a trail, please enter the number of the corresponding trail"
+        puts "enter 'back' to go back"
+        puts "or enter 'exit' to exit"
+        input = user_input
+        
+
     end 
 
 
