@@ -1,4 +1,5 @@
 class CLI 
+    attr_accessor :current_state 
 
     VALID_STATES = ["alabama", "alaska", "arizona", "arkansas", "california", 
         "colorado", "connecticut", "delaware", "florida", "georgia",
@@ -37,11 +38,11 @@ class CLI
 
 
     def print_state_trails(state)
-        state = state.split("-").map{|word| word.capitalize}.join(" ")
+        @current_state = state.split("-").map{|word| word.capitalize}.join(" ")
         puts "                                                  "
-        puts "Here are the top rated hiking trails for #{state}:"
+        puts "Here are the top rated hiking trails for #{current_state}:"
         puts "--------------------------------------------------"
-        Trail.select_by_state(state).each_with_index do |trail, index|
+        Trail.select_by_state(current_state).each_with_index do |trail, index|
         puts "#{index + 1}. #{trail.name} - #{trail.location}"
         puts "                           "
         puts "#{trail.overview}"
@@ -67,12 +68,16 @@ class CLI
             puts "              "
             puts "Happy hiking!"
         else 
+            puts "                                "
             puts "invalid entry. Please try again."
             select_trail
         end 
     end 
 
     def more_trail_info(input)
+        trail = Trail.select_by_state(current_state)[input -1]
+        binding.pry 
+
 
     end 
 
