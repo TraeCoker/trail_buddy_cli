@@ -14,31 +14,30 @@ class CLI
     def start 
         puts "Hello adventurer! Welcome to Trail Buddy!"
         puts "Please enter the name of the State you would like to explore today:"
-        input = user_input
-        validate_input(input)
+        state = user_input
+        validate_input(state)
     end 
 
-    def validate_input(input)
-        if VALID_STATES.include?(input)
-            #input[" "]= "-" if input.include?(" ")
-            get_state_trails(input)
+    def validate_input(state)
+        if VALID_STATES.include?(state)
+            get_state_trails(state)
         else 
             puts "Invalid entry."
             puts "Please enter the name of the State you would like to explore today:"
-            input = user_input
-            validate_input(input)
+            state = user_input
+            validate_input(state)
         end 
     end 
 
-    def get_state_trails(input)
-        Scraper.get_data_by_state(input)
-        state = input.capitalize
+    def get_state_trails(state)
+        Scraper.get_data_by_state(state)
         print_state_trails(state)
     end 
         
 
 
     def print_state_trails(state)
+        state = state.split("-").map{|word| word.capitalize}.join(" ")
         puts "Here are the top rated hiking trails for #{state}:"
         Trail.select_by_state(state).each_with_index do |trail, index|
         puts "#{index + 1}. #{trail.name}"

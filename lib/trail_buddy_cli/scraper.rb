@@ -18,7 +18,6 @@ class Scraper
                 :link => "https://www.alltrails.com" + relative_path }
                 Trail.new(trail_hash)
             end 
-            binding.pry 
     end 
 
 
