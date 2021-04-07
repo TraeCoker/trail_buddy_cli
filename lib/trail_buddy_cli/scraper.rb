@@ -24,8 +24,16 @@ class Scraper
     def self.get_individual_trail_data(trail_link)
         url = URI.parse(trail_link)
         response = Net::HTTP.get(url)
-        data = Nokogiri::HTML(response)
-        binding.pry 
+        noko = Nokogiri::HTML(response)
+        if noko.css("body").text.include?("You are being redirected")
+            redirected_link = noko.css("a").first.attributes["href"].value
+            url = URI.parse(redirected_link)
+            response = Net::HTTP.get(url)
+            data = Nokogiri::HTML(response)
+        else 
+            data = noko 
+        end 
+        #binding.pry 
 
         attributes_hash = {}
 
