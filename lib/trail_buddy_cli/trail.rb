@@ -1,12 +1,14 @@
 class Trail 
-  attr_accessor :state, :name, :location, :length, :time_estimate, :difficulty, :link 
+  attr_accessor :state, :name, :location, :length, :time_estimate, :difficulty, :link,
+                :overview, :description, :elevation_gain, :route_type, :facilities, :contact  
   @@all =[]
 
     def initialize(trail_hash)
         trail_hash.each do |key, value|
             self.send("#{key}=", value)
         end 
-        Scraper.get_individual_trail_data(link)
+        #binding.pry 
+        add_additional_attributes(Scraper.get_individual_trail_data(link))
         save 
     end 
 
@@ -20,6 +22,12 @@ class Trail
 
     def self.select_by_state(state)
         all.select{|trail| trail.state == state}
+    end 
+
+    def add_additional_attributes(attributes_hash)
+        attributes_hash.each do |key, value|
+            self.send("#{key}=", value)
+        end 
     end 
 
 

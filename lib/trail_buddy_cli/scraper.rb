@@ -26,15 +26,16 @@ class Scraper
         response = Net::HTTP.get(url)
         data = Nokogiri::HTML(response)
 
+        #binding.pry 
+        attributes_hash = {}
+        attributes_hash[:overview] = data.css(".line-clamp-4").text if data.css(".line-clamp-4") != nil
+        #:elevation_gain => data.css(".styles-module__detailData___kQ-eK")[1].text if data.css(".styles-module__detailData___kQ-eK") != nil,
+        #:route_type => data.css(".styles-module__detailData___kQ-eK")[2].text if data.css(".styles-module__detailData___kQ-eK")[2] != nil,
+        #:description => data.css(".styles-module__displayText___17Olo")[0].text if data.css(".styles-module__displayText___17Olo")[0] != nil,
+        #:facilities => data.css(".styles-module__displayText___17Olo")[1].text if data.css(".styles-module__displayText___17Olo")[1] != nil,
+        #:contact => data.css(".styles-module__displayText___17Olo")[2].text if data.css(".styles-module__displayText___17Olo")[2] != nil  
+        attributes_hash 
 
-        overview = data.css(".line-clamp-4").text
-        elevation_gain = data.css(".styles-module__detailData___kQ-eK")[1].text
-        route_type = data.css(".styles-module__detailData___kQ-eK")[2].text
-        description = data.css(".styles-module__displayText___17Olo")[0].text
-        facilities = data.css(".styles-module__displayText___17Olo")[1].text
-        contact = data.css(".styles-module__displayText___17Olo")[2].text
-
-        binding.pry 
 
 
 
