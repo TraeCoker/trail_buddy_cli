@@ -45,18 +45,36 @@ class CLI
         puts "#{index + 1}. #{trail.name} - #{trail.location}"
         puts "                           "
         puts "#{trail.overview}"
-        puts "Total time is #{trail.time_estimate}"
+        puts "Total time is #{trail.time_estimate.downcase}"
         puts "                           "
         end 
         puts "--------------------------------------------------"
+        select_trail
+    end 
+
+    def select_trail
         puts "For more information on a trail, please enter the number of the corresponding trail"
         puts "enter 'back' to go back"
         puts "or enter 'exit' to exit"
         input = user_input
-        
 
+        if input.to_i.between?(1,10)
+            more_trail_info(input.to_i)
+        elsif input == "back"
+            puts "              "
+            start 
+        elsif input == "exit"
+            puts "              "
+            puts "Happy hiking!"
+        else 
+            puts "invalid entry. Please try again."
+            select_trail
+        end 
     end 
 
+    def more_trail_info(input)
+
+    end 
 
     def user_input 
         gets.strip.downcase

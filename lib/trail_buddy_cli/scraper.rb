@@ -25,6 +25,7 @@ class Scraper
         url = URI.parse(trail_link)
         response = Net::HTTP.get(url)
         data = Nokogiri::HTML(response)
+        binding.pry 
 
         attributes_hash = {}
 
