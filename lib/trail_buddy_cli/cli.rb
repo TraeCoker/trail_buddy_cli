@@ -20,7 +20,7 @@ class CLI
 
     def validate_input(input)
         if VALID_STATES.include?(input)
-            input[" "]= "-" if input.include?(" ")
+            #input[" "]= "-" if input.include?(" ")
             get_state_trails(input)
         else 
             puts "Invalid entry."
