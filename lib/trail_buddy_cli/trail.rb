@@ -6,6 +6,7 @@ class Trail
         trail_hash.each do |key, value|
             self.send("#{key}=", value)
         end 
+        Scraper.get_individual_trail_data(link)
         save 
     end 
 

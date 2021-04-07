@@ -21,7 +21,20 @@ class Scraper
     end 
 
 
-    def self.get_individual_trail_data(trail_url)
+    def self.get_individual_trail_data(trail_link)
+        url = URI.parse(trail_link)
+        response = Net::HTTP.get(url)
+        data = Nokogiri::HTML(response)
+
+
+        overview = data.css(".line-clamp-4").text
+        elevation_gain = data.css(".styles-module__detailData___kQ-eK")[1].text
+        route_type = data.css(".styles-module__detailData___kQ-eK")[2].text
+        description = data.css(".styles-module__displayText___17Olo")[0].text
+        facilities = data.css(".styles-module__displayText___17Olo")[1].text
+        contact = data.css(".styles-module__displayText___17Olo")[2].text
+
+        binding.pry 
 
 
 
