@@ -5,7 +5,16 @@ class Scraper
         state[" "]= "-" if state.include?(" ")
         url = URI.parse("https://www.alltrails.com/us/#{state}")
         response = Net::HTTP.get(url)
-        data = Nokogiri::HTML(response)
+        noko = Nokogiri::HTML(response)
+        if redirected?(noko)
+            redirected_link = noko.css("a").first.attributes["href"].value
+            url = URI.parse(redirected_link)
+            response = Net::HTTP.get(url)
+            data = Nokogiri::HTML(response)
+        else 
+            data = noko 
+        end 
+        
         trails = data.css(".styles-module__trailCard___2oHiP").each do |trail|
             relative_path = trail.css("a").first.attributes["href"].value
             trail_hash = {
@@ -25,7 +34,7 @@ class Scraper
         url = URI.parse(trail_link)
         response = Net::HTTP.get(url)
         noko = Nokogiri::HTML(response)
-        if noko.css("body").text.include?("You are being redirected")
+        if redirected?(noko)
             redirected_link = noko.css("a").first.attributes["href"].value
             url = URI.parse(redirected_link)
             response = Net::HTTP.get(url)
@@ -47,7 +56,9 @@ class Scraper
         attributes_hash 
     end 
 
-
+    def self.redirected?(noko)
+        noko.css("body").text.include?("You are being redirected")
+    end 
 
 
 
