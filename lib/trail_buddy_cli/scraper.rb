@@ -21,6 +21,15 @@ class Scraper
     end 
 
 
+    def self.get_individual_trail_data(trail_url)
+
+
+
+
+
+    end 
+
+
 
 
 
