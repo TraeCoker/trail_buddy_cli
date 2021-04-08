@@ -102,7 +102,7 @@ class CLI
         puts "To exit, enter 'exit'"
         input = user_input
         if input == "back"
-            print_state_trails(current_state)
+            print_state_trails
         elsif input == "new"
             puts ""
             start 
