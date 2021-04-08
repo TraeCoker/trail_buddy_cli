@@ -84,14 +84,13 @@ class CLI
         puts "Elevation gain: #{trail.elevation_gain}"
         puts "route type: #{trail.route_type}"
         puts "---------------------------------------------------"
-        trail.respond_to?("description") ? (puts "#{trail.description}") : (puts "#{trail.overview}")
+        trail.description != nil ? (puts "#{trail.description}") : (puts "#{trail.overview}")
         puts "---------------------------------------------------"
         puts "                                               "
-        puts "Facilities: #{trail.facilities}"
+        puts "Facilities: #{trail.facilities}" if trail.facilities != nil 
         puts "                                 "
-        puts "Contact: #{trail.contact}"
-
-
+        puts "Contact: #{trail.contact}" if trail.contact != nil 
+binding.pry 
     end 
 
     def user_input 
