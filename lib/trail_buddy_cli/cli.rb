@@ -84,7 +84,7 @@ class CLI
         puts "Elevation gain: #{trail.elevation_gain}"
         puts "route type: #{trail.route_type}"
         puts "---------------------------------------------------"
-        puts "#{trail.description}"
+        trail.respond_to?("description") ? (puts "#{trail.description}") : (puts "#{trail.overview}")
         puts "---------------------------------------------------"
         puts "                                               "
         puts "Facilities: #{trail.facilities}"
