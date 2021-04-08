@@ -57,13 +57,13 @@ class CLI
 
     def select_trail
         puts "For more information on a trail, please enter the number of the corresponding trail"
-        puts "enter 'back' to go back"
-        puts "or enter 'exit' to exit"
+        puts "To explore a new state, enter 'new'"
+        puts "To exit, enter 'exit'"
         input = user_input
 
         if input.to_i.between?(1,10)
             more_trail_info(input.to_i)
-        elsif input == "back"
+        elsif input == "new"
             puts ""
             start 
         elsif input == "exit"
@@ -104,6 +104,7 @@ class CLI
         if input == "back"
             print_state_trails(current_state)
         elsif input == "new"
+            puts ""
             start 
         elsif input == "exit"
             puts ""
