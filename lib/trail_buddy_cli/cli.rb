@@ -14,6 +14,7 @@ class CLI
 
     def start 
         puts "Hello adventurer! Welcome to Trail Buddy!"
+        puts ""
         puts "Please enter the name of the State you would like to explore today:"
         state = user_input
         validate_input(state)
@@ -31,23 +32,24 @@ class CLI
     end 
 
     def get_state_trails(state)
-        Scraper.get_data_by_state(state)
-        print_state_trails(state)
+        @current_state = state.split("-").map{|word| word.capitalize}.join(" ")
+
+        Scraper.get_data_by_state(state) if !duplicate?(state)
+        print_state_trails
     end 
         
 
 
-    def print_state_trails(state)
-        @current_state = state.split("-").map{|word| word.capitalize}.join(" ")
-        puts "                                                  "
+    def print_state_trails
+        puts ""                                                  
         puts "Here are the top rated hiking trails for #{current_state}:"
         puts "--------------------------------------------------"
         Trail.select_by_state(current_state).each_with_index do |trail, index|
         puts "#{index + 1}. #{trail.name} - #{trail.location}"
-        puts "                           "
+        puts ""
         puts "#{trail.overview}"
         puts "Total time is #{trail.time_estimate.downcase}"
-        puts "                           "
+        puts ""
         end 
         puts "--------------------------------------------------"
         select_trail
@@ -62,13 +64,13 @@ class CLI
         if input.to_i.between?(1,10)
             more_trail_info(input.to_i)
         elsif input == "back"
-            puts "              "
+            puts ""
             start 
         elsif input == "exit"
-            puts "              "
+            puts ""
             puts "Happy hiking!"
         else 
-            puts "                                "
+            puts ""
             puts "invalid entry. Please try again."
             select_trail
         end 
@@ -76,8 +78,8 @@ class CLI
 
     def more_trail_info(input)
         trail = Trail.select_by_state(current_state)[input -1]
-        puts "             "
-        puts "                         "
+        puts ""             
+        puts ""
         puts "#{trail.name} - #{trail.location}, #{current_state}"
         puts "#{trail.length} - #{trail.time_estimate}"
         puts "Difficulty: #{trail.difficulty}"
@@ -86,15 +88,15 @@ class CLI
         puts "---------------------------------------------------"
         trail.description != nil ? (puts "#{trail.description}") : (puts "#{trail.overview}")
         puts "---------------------------------------------------"
-        puts "                                               "
+        puts ""
         puts "Facilities: #{trail.facilities}" if trail.facilities != nil 
-        puts "                                 "
+        puts ""
         puts "Contact: #{trail.contact}" if trail.contact != nil 
         menu 
     end 
 
     def menu 
-        puts "                     "
+        puts ""
         puts "To return to #{current_state} trails, please enter 'back'"
         puts "To explore a new state, enter 'new'"
         puts "To exit, enter 'exit'"
@@ -104,16 +106,22 @@ class CLI
         elsif input == "new"
             start 
         elsif input == "exit"
-            puts "        "
+            puts ""
             puts "Happy hiking!"
         else 
-            puts "invalide entry! Please try again."
+            puts ""
+            puts "invalid entry! Please try again."
             menu 
         end 
+    end 
+
+    def duplicate?(state)
+        Trail.all.detect{|trail| trail.state == current_state} ? true :false 
     end 
 
     def user_input 
         gets.strip.downcase
     end 
+
 
 end 
