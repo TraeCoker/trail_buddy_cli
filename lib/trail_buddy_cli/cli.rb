@@ -90,7 +90,26 @@ class CLI
         puts "Facilities: #{trail.facilities}" if trail.facilities != nil 
         puts "                                 "
         puts "Contact: #{trail.contact}" if trail.contact != nil 
-binding.pry 
+        menu 
+    end 
+
+    def menu 
+        puts "                     "
+        puts "To return to #{current_state} trails, please enter 'back'"
+        puts "To explore a new state, enter 'new'"
+        puts "To exit, enter 'exit'"
+        input = user_input
+        if input == "back"
+            print_state_trails(current_state)
+        elsif input == "new"
+            start 
+        elsif input == "exit"
+            puts "        "
+            puts "Happy hiking!"
+        else 
+            puts "invalide entry! Please try again."
+            menu 
+        end 
     end 
 
     def user_input 
