@@ -92,6 +92,7 @@ class CLI
         puts "Facilities: #{trail.facilities}" if trail.facilities != nil 
         puts ""
         puts "Contact: #{trail.contact}" if trail.contact != nil 
+        binding.pry 
         menu 
     end 
 

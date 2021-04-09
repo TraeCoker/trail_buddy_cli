@@ -29,6 +29,9 @@ class Trail
         end 
     end 
 
+    def weather
+        ApiForWeather.get_weather_by_city_and_state(self.location, self.state)
+    end 
 
 
 end 
