@@ -18,7 +18,24 @@ def self.get_weather_by_city_and_state(city, state)
     request["x-rapidapi-host"] = 'community-open-weather-map.p.rapidapi.com'
 
     response = http.request(request)
-    forecast = JSON.parse(response.read_body)
+    data = JSON.parse(response.read_body)
+    
+    i = 0 
+    forecast_array = data["list"].map do |day|
+        days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+        hash = {}
+        
+        hash[:day] = days[Time.now.wday + i]
+        hash[:min_temp] = day["temp"]["min"].to_i
+        hash[:max_temp] = day["temp"]["max"].to_i
+        hash[:description] = day["weather"][0]["description"]
+        hash[:humidity] = day["humidity"]
+
+        i += 1
+        hash 
+
+
+    end 
     binding.pry 
 
 
