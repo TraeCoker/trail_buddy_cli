@@ -32,7 +32,7 @@ class CLI
     end 
 
     def get_state_trails(state)
-        @current_state = state.split("-").map{|word| word.capitalize}.join(" ")
+        @current_state = state.split(" ").map{|word| word.capitalize}.join(" ")
 
         Scraper.get_data_by_state(state) if !duplicate?(state)
         print_state_trails
@@ -88,10 +88,11 @@ class CLI
         puts "---------------------------------------------------"
         trail.description != nil ? (puts "#{trail.description}") : (puts "#{trail.overview}")
         puts "---------------------------------------------------"
+        puts "Facilities and contact information:"
         puts ""
-        puts "Facilities: #{trail.facilities}" if trail.facilities != nil 
+        puts "#{trail.facilities}" #if trail.facilities != nil 
         puts ""
-        puts "Contact: #{trail.contact}" if trail.contact != nil 
+        puts "#{trail.contact}" #if trail.contact != nil 
         menu 
     end 
 

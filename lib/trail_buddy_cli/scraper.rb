@@ -27,6 +27,7 @@ class Scraper
                 :link => "https://www.alltrails.com" + relative_path }
                 Trail.new(trail_hash)
             end 
+
     end 
 
 
@@ -42,7 +43,7 @@ class Scraper
         else 
             data = noko 
         end 
-        #binding.pry 
+         
 
         attributes_hash = {}
 
@@ -52,7 +53,7 @@ class Scraper
         attributes_hash[:description] = data.css(".styles-module__displayText___17Olo")[0].text if data.css(".styles-module__displayText___17Olo")[0] != nil
         attributes_hash[:facilities] = data.css(".styles-module__displayText___17Olo")[1].text if data.css(".styles-module__displayText___17Olo")[1] != nil
         attributes_hash[:contact] = data.css(".styles-module__displayText___17Olo")[2].text if data.css(".styles-module__displayText___17Olo")[2] != nil  
-        
+
         attributes_hash 
     end 
 
