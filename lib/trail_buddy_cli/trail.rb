@@ -30,7 +30,7 @@ class Trail
     end 
 
     def weather
-        ApiForWeather.get_weather_by_city_and_state(self.location, self.state)
+        API.get_weather_by_city_and_state(self.location, self.state)
     end 
 
 

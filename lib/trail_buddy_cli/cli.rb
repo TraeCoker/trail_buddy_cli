@@ -1,5 +1,5 @@
 class CLI 
-    attr_accessor :current_state 
+    attr_accessor :current_state, :current_trail 
 
     VALID_STATES = ["alabama", "alaska", "arizona", "arkansas", "california", 
         "colorado", "connecticut", "delaware", "florida", "georgia",
@@ -77,32 +77,36 @@ class CLI
     end 
 
     def more_trail_info(input)
-        trail = Trail.select_by_state(current_state)[input -1]
+        @current_trail = Trail.select_by_state(current_state)[input -1]
         puts ""             
         puts ""
-        puts "#{trail.name} - #{trail.location}, #{current_state}"
-        puts "#{trail.length} - #{trail.time_estimate}"
-        puts "Difficulty: #{trail.difficulty}"
-        puts "Elevation gain: #{trail.elevation_gain}"
-        puts "route type: #{trail.route_type}"
+        puts "#{current_trail.name} - #{current_trail.location}, #{current_state}"
+        puts "#{current_trail.length} - #{current_trail.time_estimate}"
+        puts "Difficulty: #{current_trail.difficulty}"
+        puts "Elevation gain: #{current_trail.elevation_gain}"
+        puts "route type: #{current_trail.route_type}"
         puts "---------------------------------------------------"
-        trail.description != nil ? (puts "#{trail.description}") : (puts "#{trail.overview}")
+        current_trail.description != nil ? (puts "#{current_trail.description}") : (puts "#{current_trail.overview}")
         puts "---------------------------------------------------"
         puts "Facilities and contact information:"
         puts ""
-        puts "#{trail.facilities}" #if trail.facilities != nil 
+        puts "#{current_trail.facilities}" 
         puts ""
-        puts "#{trail.contact}" #if trail.contact != nil 
+        puts "#{current_trail.contact}" 
         menu 
     end 
 
     def menu 
         puts ""
-        puts "To return to #{current_state} trails, please enter 'back'"
-        puts "To explore a new state, enter 'new'"
-        puts "To exit, enter 'exit'"
+        puts "-To view the weather forecast for this area, enter 'weather'"
+        puts "-To return to #{current_state} trails, please enter 'back'"
+        puts "-To explore a new state, enter 'new'"
+        puts "-To exit, enter 'exit'"
         input = user_input
-        if input == "back"
+        if input == "weather"
+            puts ""
+            get_weather
+        elsif input == "back"
             print_state_trails
         elsif input == "new"
             puts ""
@@ -115,6 +119,10 @@ class CLI
             puts "invalid entry! Please try again."
             menu 
         end 
+    end 
+
+    def get_weather
+        current_trail.weather 
     end 
 
     def duplicate?(state)
