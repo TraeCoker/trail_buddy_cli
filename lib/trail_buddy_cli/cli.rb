@@ -106,6 +106,7 @@ class CLI
         if input == "weather"
             puts ""
             get_weather
+            print_weather 
         elsif input == "back"
             print_state_trails
         elsif input == "new"
@@ -122,8 +123,23 @@ class CLI
     end 
 
     def get_weather
-        API.get_weather_by_city_and_state(current_trail.location, current_trail.state)
         binding.pry 
+        API.get_weather_by_city_and_state(current_trail.location, current_trail.state) 
+    end 
+
+    def print_weather 
+        puts ""
+        puts "----------------------------------------"
+        current_trail.weather.each do |day|
+        puts "#{day.day}"
+        puts ""
+        puts "#{day.description}"
+        puts "High: #{day.max_temp}°"
+        puts "Low: #{day.min_temp}°"
+        puts "Humidity: #{day.humidity}%"
+        puts '_____________________'
+        end 
+        puts "----------------------------------------"
     end 
 
     def duplicate?(state)
