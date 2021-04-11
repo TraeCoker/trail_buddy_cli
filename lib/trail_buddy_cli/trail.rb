@@ -1,6 +1,6 @@
 class Trail 
-  attr_accessor :state, :name, :location, :length, :time_estimate, :difficulty, :link,
-                :overview, :description, :elevation_gain, :route_type, :facilities, :contact  
+  attr_accessor :state, :name, :location, :length, :time_estimate, :difficulty, :link, :overview, 
+                :description, :elevation_gain, :route_type, :facilities, :contact
   @@all =[]
 
     def initialize(trail_hash)
@@ -30,7 +30,7 @@ class Trail
     end 
 
     def weather
-        API.get_weather_by_city_and_state(self.location, self.state)
+        Weather.all.select{|weather| weather.trail == self}
     end 
 
 

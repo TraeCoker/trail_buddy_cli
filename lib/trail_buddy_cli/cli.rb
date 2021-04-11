@@ -122,7 +122,8 @@ class CLI
     end 
 
     def get_weather
-        current_trail.weather 
+        API.get_weather_by_city_and_state(current_trail.location, current_trail.state)
+        binding.pry 
     end 
 
     def duplicate?(state)

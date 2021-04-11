@@ -25,6 +25,7 @@ def self.get_weather_by_city_and_state(city, state)
         days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
         hash = {}
         
+        hash[:trail] = Trail.all.detect{|trail| trail.location == city && trail.state == state} 
         hash[:day] = days[Time.now.wday + i]
         hash[:min_temp] = day["temp"]["min"].to_i
         hash[:max_temp] = day["temp"]["max"].to_i
@@ -33,10 +34,11 @@ def self.get_weather_by_city_and_state(city, state)
 
         i += 1
         hash 
+        Weather.new(hash)
 
 
     end 
-    binding.pry 
+    #binding.pry 
 
 
 end  
