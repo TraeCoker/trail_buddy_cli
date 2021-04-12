@@ -57,10 +57,10 @@ class CLI
         puts "Here are the top rated hiking trails for #{current_state}:".colorize(:green)
         puts "--------------------------------------------------".colorize(:light_black)
         Trail.select_by_state(current_state).each_with_index do |trail, index|
-        puts "#{index + 1}. #{trail.name} - #{trail.location}".colorize(:blue)
+        puts "#{index + 1}. #{trail.name}".colorize(:blue) + " - #{trail.location}"
         puts ""
         puts "#{trail.overview}"
-        puts "Total time is #{trail.time_estimate.downcase}"
+        puts "Total time".colorize(:red) + " #{trail.time_estimate.downcase}"
         puts ""
         end 
         puts "--------------------------------------------------".colorize(:light_black)
@@ -92,15 +92,15 @@ class CLI
         @current_trail = Trail.select_by_state(current_state)[input -1]
         puts ""             
         puts ""
-        puts "#{current_trail.name} - #{current_trail.location}, #{current_state}".colorize(:blue)
-        puts "Length: #{current_trail.length} - #{current_trail.time_estimate}"
-        puts "Difficulty: #{current_trail.difficulty}"
-        puts "Elevation gain: #{current_trail.elevation_gain}"
-        puts "route type: #{current_trail.route_type}"
+        puts "#{current_trail.name}".colorize(:blue) + " - #{current_trail.location}, #{current_state}"
+        puts "Length:".colorize(:red) + "#{current_trail.length} - #{current_trail.time_estimate}"
+        puts "Difficulty:".colorize(:red) + " #{current_trail.difficulty}"
+        puts "Elevation gain:".colorize(:red) + " #{current_trail.elevation_gain}"
+        puts "route type:".colorize(:red) + " #{current_trail.route_type}"
         puts "---------------------------------------------------".colorize(:light_black)
         current_trail.description != nil ? (puts "#{current_trail.description}") : (puts "#{current_trail.overview}")
         puts "---------------------------------------------------".colorize(:light_black)
-        puts "Facilities and contact information:"
+        puts "Facilities and contact information:".colorize(:red)
         puts ""
         puts "#{current_trail.facilities}" 
         puts ""
@@ -141,14 +141,14 @@ class CLI
     def print_weather 
         puts ""
         puts "----------------------------------------".colorize(:light_black)
-        current_trail.weather.each do |day|
-        puts "#{day.day}"
+        current_trail.weather.each_with_index do |day, index|
+        puts "#{day.day}".colorize(:light_blue)
         puts ""
         puts "#{day.description}"
-        puts "High: #{day.max_temp}°"
-        puts "Low: #{day.min_temp}°"
-        puts "Humidity: #{day.humidity}%"
-        puts '_____________________'
+        puts "High:".colorize(:red) + " #{day.max_temp}°"
+        puts "Low:".colorize(:red) + " #{day.min_temp}°"
+        puts "Humidity:".colorize(:red) + " #{day.humidity}%"
+        puts '_____________________'.colorize(:light_black) if index != 6
         end 
         puts "----------------------------------------".colorize(:light_black)
         weather_menu 
