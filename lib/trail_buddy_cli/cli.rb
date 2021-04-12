@@ -8,12 +8,15 @@ class CLI
          "mississippi", "missouri", "montana", "nebraska", "nevada", "new hampshire", "new jersey", 
          "new mexico", "new york", "north carolina", "north dakota",
          "ohio", "oklahoma", "oregon", "pennsylvania", "rhode island", 
-         "south carolina", "south dakota", "tennessee", "texas", "utah", "vermont", "virgin island", 
+         "south carolina", "south dakota", "tennessee", "texas", "utah", "vermont", 
          "virginia", "washington", "washington dc", "west virginia", "wisconsin", "wyoming"] 
 
 
     def start 
         system "clear"
+        binding.pry
+        hello 
+        puts ""
         puts "Hello adventurer! Welcome to Trail Buddy!"
         puts ""
         puts "Please enter the name of the State you would like to explore today:"
@@ -41,7 +44,7 @@ class CLI
         
 
 
-    def print_state_trails
+    def print_state_trails 
         system "clear"
         puts ""                                                  
         puts "Here are the top rated hiking trails for #{current_state}:"
@@ -117,8 +120,9 @@ class CLI
             puts ""
             start 
         elsif input == "exit"
-            puts ""
-            puts "Happy hiking!"
+            #puts ""
+            #puts "Happy hiking!"
+            goodbye
         else 
             puts ""
             puts "invalid entry! Please try again."
@@ -159,8 +163,9 @@ class CLI
             puts ""
             start 
         elsif input == "exit"
-            puts ""
-            puts "Happy hiking!"
+            #puts ""
+            #puts "Happy hiking!"
+            goodbye 
         else 
             puts ""
             puts "invalid entry! Please try again."
@@ -174,6 +179,27 @@ class CLI
 
     def user_input 
         gets.strip.downcase
+    end 
+
+    def hello 
+        puts <<-'EOF'
+        ████████╗██████╗░░█████╗░██╗██╗░░░░░  ██████╗░██╗░░░██╗██████╗░██████╗░██╗░░░██╗
+        ╚══██╔══╝██╔══██╗██╔══██╗██║██║░░░░░  ██╔══██╗██║░░░██║██╔══██╗██╔══██╗╚██╗░██╔╝
+        ░░░██║░░░██████╔╝███████║██║██║░░░░░  ██████╦╝██║░░░██║██║░░██║██║░░██║░╚████╔╝░
+        ░░░██║░░░██╔══██╗██╔══██║██║██║░░░░░  ██╔══██╗██║░░░██║██║░░██║██║░░██║░░╚██╔╝░░
+        ░░░██║░░░██║░░██║██║░░██║██║███████╗  ██████╦╝╚██████╔╝██████╔╝██████╔╝░░░██║░░░
+        ░░░╚═╝░░░╚═╝░░╚═╝╚═╝░░╚═╝╚═╝╚══════╝  ╚═════╝░░╚═════╝░╚═════╝░╚═════╝░░░░╚═╝░░░
+        EOF
+    end 
+
+    def goodbye 
+        system "clear"
+       puts "
+        █░█ ▄▀█ █▀█ █▀█ █▄█   █░█ █ █▄▀ █ █▄░█ █▀▀ █
+        █▀█ █▀█ █▀▀ █▀▀ ░█░   █▀█ █ █░█ █ █░▀█ █▄█ ▄"#.each_char {|c| putc c ; sleep 0.05; $stdout.flush }
+        sleep 3
+        system "clear"
+
     end 
 
 
