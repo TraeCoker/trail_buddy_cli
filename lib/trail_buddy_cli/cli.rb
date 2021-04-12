@@ -14,7 +14,6 @@ class CLI
 
     def start 
         system "clear"
-        binding.pry
         hello 
         puts ""
         puts "Hello adventurer! Welcome to Trail Buddy!"
@@ -194,9 +193,7 @@ class CLI
 
     def goodbye 
         system "clear"
-       puts "
-        █░█ ▄▀█ █▀█ █▀█ █▄█   █░█ █ █▄▀ █ █▄░█ █▀▀ █
-        █▀█ █▀█ █▀▀ █▀▀ ░█░   █▀█ █ █░█ █ █░▀█ █▄█ ▄"#.each_char {|c| putc c ; sleep 0.05; $stdout.flush }
+        puts "Happy Hiking!".each_char {|c| putc c ; sleep 0.05; $stdout.flush }
         sleep 3
         system "clear"
 

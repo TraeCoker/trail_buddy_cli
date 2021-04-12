@@ -26,7 +26,7 @@ def self.get_weather_by_trail(trail)
         hash = {}
         
         hash[:trail] = trail
-        hash[:day] = days[Time.now.wday + i]
+        hash[:day] = days[Time.now.wday + i < 7 ? Time.now.wday + i : 0]
         hash[:min_temp] = day["temp"]["min"].to_i
         hash[:max_temp] = day["temp"]["max"].to_i
         hash[:description] = day["weather"][0]["description"]
