@@ -13,6 +13,7 @@ class CLI
 
 
     def start 
+        system "clear"
         puts "Hello adventurer! Welcome to Trail Buddy!"
         puts ""
         puts "Please enter the name of the State you would like to explore today:"
@@ -97,11 +98,12 @@ class CLI
     end 
 
     def menu 
-        puts ""
+        puts "" 
         puts "-To view the weather forecast for this area, enter 'weather'"
-        puts "-To return to #{current_state} trails, please enter 'back'"
+        puts "-To return to #{current_state} trails, enter 'back'"
         puts "-To explore a new state, enter 'new'"
         puts "-To exit, enter 'exit'"
+
         input = user_input
         if input == "weather"
             puts ""
@@ -123,14 +125,15 @@ class CLI
     end 
 
     def get_weather
-        binding.pry 
-        API.get_weather_by_city_and_state(current_trail.location, current_trail.state) 
+        API.get_weather_by_trail(current_trail) 
     end 
 
     def print_weather 
+       # binding.pry 
         puts ""
         puts "----------------------------------------"
         current_trail.weather.each do |day|
+           # binding.pry 
         puts "#{day.day}"
         puts ""
         puts "#{day.description}"
@@ -140,6 +143,29 @@ class CLI
         puts '_____________________'
         end 
         puts "----------------------------------------"
+        weather_menu 
+    end
+    
+    def weather_menu 
+        puts "" 
+        puts "-To return to #{current_state} trails, enter 'back'"
+        puts "-To explore a new state, enter 'new'"
+        puts "-To exit, enter 'exit'"
+
+        input = user_input
+        if input == "back"
+            print_state_trails
+        elsif input == "new"
+            puts ""
+            start 
+        elsif input == "exit"
+            puts ""
+            puts "Happy hiking!"
+        else 
+            puts ""
+            puts "invalid entry! Please try again."
+            menu 
+        end 
     end 
 
     def duplicate?(state)

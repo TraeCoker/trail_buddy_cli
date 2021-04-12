@@ -1,9 +1,9 @@
 #API is used to get weather data for individual trails 
 class API
 
-def self.get_weather_by_city_and_state(city, state)
+def self.get_weather_by_trail(trail)
     key = ENV["API_KEY"]
-    results = Geocoder.search("#{city}, #{state}")
+    results = Geocoder.search("#{trail.location}, #{trail.state}")
     coordinates = results.first.coordinates
  
 
@@ -25,7 +25,7 @@ def self.get_weather_by_city_and_state(city, state)
         days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
         hash = {}
         
-        hash[:trail] = Trail.all.detect{|trail| trail.location == city && trail.state == state} 
+        hash[:trail] = trail
         hash[:day] = days[Time.now.wday + i]
         hash[:min_temp] = day["temp"]["min"].to_i
         hash[:max_temp] = day["temp"]["max"].to_i
