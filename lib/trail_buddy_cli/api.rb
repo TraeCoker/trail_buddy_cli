@@ -38,7 +38,7 @@ def self.get_weather_by_trail(trail)
 
 
     end 
-    #binding.pry 
+
 
 
 end  

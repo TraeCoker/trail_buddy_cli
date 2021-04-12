@@ -42,6 +42,7 @@ class CLI
 
 
     def print_state_trails
+        system "clear"
         puts ""                                                  
         puts "Here are the top rated hiking trails for #{current_state}:"
         puts "--------------------------------------------------"
@@ -78,6 +79,7 @@ class CLI
     end 
 
     def more_trail_info(input)
+        system "clear"
         @current_trail = Trail.select_by_state(current_state)[input -1]
         puts ""             
         puts ""
@@ -129,11 +131,9 @@ class CLI
     end 
 
     def print_weather 
-       # binding.pry 
         puts ""
         puts "----------------------------------------"
         current_trail.weather.each do |day|
-           # binding.pry 
         puts "#{day.day}"
         puts ""
         puts "#{day.description}"
