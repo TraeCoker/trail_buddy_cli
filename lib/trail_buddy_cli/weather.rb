@@ -17,7 +17,4 @@ class Weather
         @@all 
     end 
 
-
-
-
 end 

@@ -67,7 +67,7 @@ class CLI
     end 
 
     def select_trail
-        puts "-For more information on a trail, please enter the number of the corresponding trail"
+        puts "-For more information on a trail, please enter the number of the corresponding trail (1-10)"
         puts "-To explore a new state, enter 'new'"
         puts "-To exit, enter 'exit'"
         input = user_input
@@ -175,7 +175,7 @@ class CLI
     end 
 
     def duplicate?(state)
-        Trail.all.detect{|trail| trail.state == current_state} ? true :false 
+        Trail.all.detect{|trail| trail.state == current_state} ? true : false 
     end 
 
     def user_input 
@@ -188,6 +188,5 @@ class CLI
         sleep 3
         system "clear"
     end 
-
 
 end 

@@ -61,8 +61,4 @@ class Scraper
         noko.css("body").text.include?("You are being redirected")
     end 
 
-
-
-
-
 end 

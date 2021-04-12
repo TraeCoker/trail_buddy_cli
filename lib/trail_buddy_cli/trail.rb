@@ -33,5 +33,4 @@ class Trail
         Weather.all.select{|weather| weather.trail == self}
     end 
 
-
 end 
