@@ -21,7 +21,6 @@ class Scraper
                 :state => state.split("-").map{|word| word.capitalize}.join(" "),
                 :name => trail.css(".styles-module__link___12BPT").text,
                 :location => trail.css(".styles-module__link___3T9FO").text,
-                :length => trail.css("span.xlate-none").first.text,
                 :time_estimate => trail.css("span.xlate-none").last.text,
                 :difficulty => trail.css(".styles-module__selected___3fawg").text,
                 :link => "https://www.alltrails.com" + relative_path }
@@ -47,7 +46,9 @@ class Scraper
 
         attributes_hash = {}
 
+
         attributes_hash[:overview] = data.css(".line-clamp-4").text if data.css(".line-clamp-4") != nil
+        attributes_hash[:length] = data.css(".styles-module__detailData___kQ-eK")[0].text if data.css(".styles-module__detailData___kQ-eK")[0] != nil 
         attributes_hash[:elevation_gain] = data.css(".styles-module__detailData___kQ-eK")[1].text if data.css(".styles-module__detailData___kQ-eK") != nil
         attributes_hash[:route_type] = data.css(".styles-module__detailData___kQ-eK")[2].text if data.css(".styles-module__detailData___kQ-eK")[2] != nil
         attributes_hash[:description] = data.css(".styles-module__displayText___17Olo")[0].text if data.css(".styles-module__displayText___17Olo")[0] != nil

@@ -14,8 +14,9 @@ class CLI
 
     def start 
         system "clear"
-        ["H","e","l","l","o"," ","A","d","v","e","n","t","u","r","e","r","!"].each{|letter| print letter; sleep 0.05}
-        sleep 2
+        #binding.pry 
+        "Hello Adventurer!".colorize(:green).split("").each{|letter| print letter; sleep 0.05}
+        sleep 1
         get_state 
     end 
 
@@ -41,7 +42,7 @@ class CLI
 
     def get_state_trails(state)
         puts ""
-        puts "Please wait while we scout up ahead..."
+        puts "Please wait while we scout up ahead...".colorize(:green)
         @current_state = state.split(" ").map{|word| word.capitalize}.join(" ")
 
         Scraper.get_data_by_state(state) if !duplicate?(state)
@@ -52,24 +53,24 @@ class CLI
 
     def print_state_trails 
         system "clear"
-        puts ""                                                  
-        puts "Here are the top rated hiking trails for #{current_state}:"
-        puts "--------------------------------------------------"
+        puts ""                                                
+        puts "Here are the top rated hiking trails for #{current_state}:".colorize(:green)
+        puts "--------------------------------------------------".colorize(:light_black)
         Trail.select_by_state(current_state).each_with_index do |trail, index|
-        puts "#{index + 1}. #{trail.name} - #{trail.location}"
+        puts "#{index + 1}. #{trail.name} - #{trail.location}".colorize(:blue)
         puts ""
         puts "#{trail.overview}"
         puts "Total time is #{trail.time_estimate.downcase}"
         puts ""
         end 
-        puts "--------------------------------------------------"
+        puts "--------------------------------------------------".colorize(:light_black)
         select_trail
     end 
 
     def select_trail
-        puts "-For more information on a trail, please enter the number of the corresponding trail (1-10)"
-        puts "-To explore a new state, enter 'new'"
-        puts "-To exit, enter 'exit'"
+        puts "-For more information on a trail, please enter the number of the corresponding trail (1-10)".colorize(:green)
+        puts "-To explore a new state, enter 'new'".colorize(:green)
+        puts "-To exit, enter 'exit'".colorize(:green)
         input = user_input
 
         if input.to_i.between?(1,10)
@@ -91,14 +92,14 @@ class CLI
         @current_trail = Trail.select_by_state(current_state)[input -1]
         puts ""             
         puts ""
-        puts "#{current_trail.name} - #{current_trail.location}, #{current_state}"
-        puts "#{current_trail.length} - #{current_trail.time_estimate}"
+        puts "#{current_trail.name} - #{current_trail.location}, #{current_state}".colorize(:blue)
+        puts "Length: #{current_trail.length} - #{current_trail.time_estimate}"
         puts "Difficulty: #{current_trail.difficulty}"
         puts "Elevation gain: #{current_trail.elevation_gain}"
         puts "route type: #{current_trail.route_type}"
-        puts "---------------------------------------------------"
+        puts "---------------------------------------------------".colorize(:light_black)
         current_trail.description != nil ? (puts "#{current_trail.description}") : (puts "#{current_trail.overview}")
-        puts "---------------------------------------------------"
+        puts "---------------------------------------------------".colorize(:light_black)
         puts "Facilities and contact information:"
         puts ""
         puts "#{current_trail.facilities}" 
@@ -109,10 +110,10 @@ class CLI
 
     def menu 
         puts "" 
-        puts "-To view the weather forecast for this area, enter 'weather'"
-        puts "-To return to #{current_state} trails, enter 'back'"
-        puts "-To explore a new state, enter 'new'"
-        puts "-To exit, enter 'exit'"
+        puts "-To view the weather forecast for this area, enter 'weather'".colorize(:green)
+        puts "-To return to #{current_state} trails, enter 'back'".colorize(:green)
+        puts "-To explore a new state, enter 'new'".colorize(:green)
+        puts "-To exit, enter 'exit'".colorize(:green)
 
         input = user_input
         if input == "weather"
@@ -139,7 +140,7 @@ class CLI
 
     def print_weather 
         puts ""
-        puts "----------------------------------------"
+        puts "----------------------------------------".colorize(:light_black)
         current_trail.weather.each do |day|
         puts "#{day.day}"
         puts ""
@@ -149,15 +150,15 @@ class CLI
         puts "Humidity: #{day.humidity}%"
         puts '_____________________'
         end 
-        puts "----------------------------------------"
+        puts "----------------------------------------".colorize(:light_black)
         weather_menu 
     end
     
     def weather_menu 
         puts "" 
-        puts "-To return to #{current_state} trails, enter 'back'"
-        puts "-To explore a new state, enter 'new'"
-        puts "-To exit, enter 'exit'"
+        puts "-To return to #{current_state} trails, enter 'back'".colorize(:green)
+        puts "-To explore a new state, enter 'new'".colorize(:green)
+        puts "-To exit, enter 'exit'".colorize(:green)
 
         input = user_input
         if input == "back"
@@ -184,7 +185,7 @@ class CLI
 
     def goodbye 
         system "clear"
-        ["H","a","p","p","y"," ","H","i","k","i","n","g","!"].each{|letter| print letter; sleep 0.05}
+        "Happy Hiking!".colorize(:green).split("").each{|letter| print letter; sleep 0.05}
         sleep 3
         system "clear"
     end 

@@ -16,4 +16,5 @@ gem "uri"
 gem "net-http"
 gem "openssl"
 gem "geocoder"
+gem "colorize"
 
