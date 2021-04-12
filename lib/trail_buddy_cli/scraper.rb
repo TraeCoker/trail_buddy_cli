@@ -61,5 +61,4 @@ class Scraper
     def self.redirected?(noko)
         noko.css("body").text.include?("You are being redirected")
     end 
-
 end 

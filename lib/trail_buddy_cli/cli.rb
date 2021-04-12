@@ -139,6 +139,7 @@ class CLI
     end 
 
     def print_weather 
+        #binding.pry 
         puts ""
         puts "----------------------------------------".colorize(:light_black)
         current_trail.weather.each_with_index do |day, index|
@@ -148,7 +149,7 @@ class CLI
         puts "High:".colorize(:red) + " #{day.max_temp}°"
         puts "Low:".colorize(:red) + " #{day.min_temp}°"
         puts "Humidity:".colorize(:red) + " #{day.humidity}%"
-        puts '_____________________'.colorize(:light_black) if index != 6
+        puts '_____________________'.colorize(:light_black) if index != current_trail.weather.length - 1 
         end 
         puts "----------------------------------------".colorize(:light_black)
         weather_menu 
@@ -186,8 +187,7 @@ class CLI
     def goodbye 
         system "clear"
         "Happy Hiking!".colorize(:green).split("").each{|letter| print letter; sleep 0.05}
-        sleep 3
+        sleep 2
         system "clear"
     end 
-
 end 
