@@ -14,9 +14,14 @@ class CLI
 
     def start 
         system "clear"
-        hello 
+        ["H","e","l","l","o"," ","A","d","v","e","n","t","u","r","e","r","!"].each{|letter| print letter; sleep 0.05}
+        sleep 2
+        get_state 
+    end 
+
+    def get_state
         puts ""
-        puts "Hello adventurer! Welcome to Trail Buddy!"
+        puts "Welcome to Trail Buddy!"
         puts ""
         puts "Please enter the name of the State you would like to explore today:"
         state = user_input
@@ -35,6 +40,8 @@ class CLI
     end 
 
     def get_state_trails(state)
+        puts ""
+        puts "Please wait while we scout up ahead..."
         @current_state = state.split(" ").map{|word| word.capitalize}.join(" ")
 
         Scraper.get_data_by_state(state) if !duplicate?(state)
@@ -60,19 +67,18 @@ class CLI
     end 
 
     def select_trail
-        puts "For more information on a trail, please enter the number of the corresponding trail"
-        puts "To explore a new state, enter 'new'"
-        puts "To exit, enter 'exit'"
+        puts "-For more information on a trail, please enter the number of the corresponding trail"
+        puts "-To explore a new state, enter 'new'"
+        puts "-To exit, enter 'exit'"
         input = user_input
 
         if input.to_i.between?(1,10)
             more_trail_info(input.to_i)
         elsif input == "new"
-            puts ""
-            start 
+            system "clear"
+            get_state
         elsif input == "exit"
-            puts ""
-            puts "Happy hiking!"
+            goodbye
         else 
             puts ""
             puts "invalid entry. Please try again."
@@ -116,11 +122,9 @@ class CLI
         elsif input == "back"
             print_state_trails
         elsif input == "new"
-            puts ""
-            start 
+            system "clear"
+            get_state 
         elsif input == "exit"
-            #puts ""
-            #puts "Happy hiking!"
             goodbye
         else 
             puts ""
@@ -159,11 +163,9 @@ class CLI
         if input == "back"
             print_state_trails
         elsif input == "new"
-            puts ""
-            start 
+            system "clear"
+            get_state 
         elsif input == "exit"
-            #puts ""
-            #puts "Happy hiking!"
             goodbye 
         else 
             puts ""
@@ -180,23 +182,11 @@ class CLI
         gets.strip.downcase
     end 
 
-    def hello 
-        puts <<-'EOF'
-        ████████╗██████╗░░█████╗░██╗██╗░░░░░  ██████╗░██╗░░░██╗██████╗░██████╗░██╗░░░██╗
-        ╚══██╔══╝██╔══██╗██╔══██╗██║██║░░░░░  ██╔══██╗██║░░░██║██╔══██╗██╔══██╗╚██╗░██╔╝
-        ░░░██║░░░██████╔╝███████║██║██║░░░░░  ██████╦╝██║░░░██║██║░░██║██║░░██║░╚████╔╝░
-        ░░░██║░░░██╔══██╗██╔══██║██║██║░░░░░  ██╔══██╗██║░░░██║██║░░██║██║░░██║░░╚██╔╝░░
-        ░░░██║░░░██║░░██║██║░░██║██║███████╗  ██████╦╝╚██████╔╝██████╔╝██████╔╝░░░██║░░░
-        ░░░╚═╝░░░╚═╝░░╚═╝╚═╝░░╚═╝╚═╝╚══════╝  ╚═════╝░░╚═════╝░╚═════╝░╚═════╝░░░░╚═╝░░░
-        EOF
-    end 
-
     def goodbye 
         system "clear"
-        puts "Happy Hiking!".each_char {|c| putc c ; sleep 0.05; $stdout.flush }
+        ["H","a","p","p","y"," ","H","i","k","i","n","g","!"].each{|letter| print letter; sleep 0.05}
         sleep 3
         system "clear"
-
     end 
 
 
