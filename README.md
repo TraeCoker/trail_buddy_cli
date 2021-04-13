@@ -1,43 +1,69 @@
-# TrailBuddyCli
+# Trail Buddy 
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/trail_buddy_cli`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Trail Buddy is a Ruby Gem CLI for viewing the top-rated hiking trails of every State in the United States.
 
 ## Installation
 
-Add this line to your application's Gemfile:
+To install enter:
 
-```ruby
-gem 'trail_buddy_cli'
-```
-
+    $ gem install trail_buddy_cli
 And then execute:
 
     $ bundle install
+To run the application enter:
 
-Or install it yourself as:
+```ruby
+$ ruby bin/run
+```
 
-    $ gem install trail_buddy_cli
 
 ## Usage
+Once the application is running, use the on-screen prompts to search for trails by state.
+```ruby
+Please enter the name of the State you would like to explore:
+Utah
+```
+This will return a list of the 10 highest rated trails for that state as per the trail ratings at Alltrails.com.
+```ruby
+1. Angels Landing Trail - Zion National Park
 
-TODO: Write usage instructions here
+## trail description 
+2. Navajo Loop and Queen's Garden Trail - Bryce Canyon
 
-## Development
+## etc
+```
+Enter the number corresponding to a trail in which you would like to view more information.
+```ruby
+$ 1
+=> Angels Landing Trail - Zion National Park, Utah
+Length: 4.4 mi - Est. 2 h 47 m
+Difficulty: hard
+Elevation gain: 1,604 ft
+route type: Out & back
+----------------------------------
+# more detailed description
+#
+# etc
+```
+Finally, enter 'new' to explore a new state, 'back' to return to the current State's trails, or enter 'weather' to view a seven day forecast for the current trail's location.
+```ruby
+$ weather 
+=> Monday
 
-After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+sky is clear
+High: 61°
+Low: 38°
+Humidity: 18%
+----------------------------------------
+# rest of week
+``` 
+You may exit the application at any time by entering 'exit'.
 
 ## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/trail_buddy_cli. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/trail_buddy_cli/blob/master/CODE_OF_CONDUCT.md).
+
+
 
 ## License
-
-The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
-
-## Code of Conduct
-
-Everyone interacting in the TrailBuddyCli project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/trail_buddy_cli/blob/master/CODE_OF_CONDUCT.md).
+[MIT](https://choosealicense.com/licenses/mit/)
