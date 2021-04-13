@@ -1,9 +1,10 @@
 class Weather 
-    attr_accessor :trail, :day, :min_temp, :max_temp, :description, :humidity 
+ 
     @@all =[]
 
     def initialize(weather_hash)
         weather_hash.each do |key, value|
+            self.class.attr_accessor(key)
             self.send("#{key}=", value)
         end 
         save 

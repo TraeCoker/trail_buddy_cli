@@ -1,10 +1,10 @@
 class Trail 
-  attr_accessor :state, :name, :location, :length, :time_estimate, :difficulty, :link, :overview, 
-                :description, :elevation_gain, :route_type, :facilities, :contact
+    
   @@all =[]
 
     def initialize(trail_hash)
         trail_hash.each do |key, value|
+            self.class.attr_accessor(key)
             self.send("#{key}=", value)
         end 
         add_additional_attributes(Scraper.get_individual_trail_data(link))
@@ -25,6 +25,7 @@ class Trail
 
     def add_additional_attributes(attributes_hash)
         attributes_hash.each do |key, value|
+            self.class.attr_accessor(key)
             self.send("#{key}=", value)
         end 
     end 
