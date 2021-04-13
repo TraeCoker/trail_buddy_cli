@@ -14,7 +14,6 @@ class CLI
 
     def start 
         system "clear"
-        #binding.pry 
         "Hello Adventurer!".colorize(:green).split("").each{|letter| print letter; sleep 0.05}
         sleep 1
         get_state 
@@ -93,7 +92,7 @@ class CLI
         puts ""             
         puts ""
         puts "#{current_trail.name}".colorize(:blue) + " - #{current_trail.location}, #{current_state}"
-        puts "Length:".colorize(:red) + "#{current_trail.length} - #{current_trail.time_estimate}"
+        puts "Length:".colorize(:red) + " #{current_trail.length} - #{current_trail.time_estimate}"
         puts "Difficulty:".colorize(:red) + " #{current_trail.difficulty}"
         puts "Elevation gain:".colorize(:red) + " #{current_trail.elevation_gain}"
         puts "route type:".colorize(:red) + " #{current_trail.route_type}"
@@ -139,19 +138,23 @@ class CLI
     end 
 
     def print_weather 
-        #binding.pry 
-        puts ""
-        puts "----------------------------------------".colorize(:light_black)
-        current_trail.weather.each_with_index do |day, index|
-        puts "#{day.day}".colorize(:light_blue)
-        puts ""
-        puts "#{day.description}"
-        puts "High:".colorize(:red) + " #{day.max_temp}°"
-        puts "Low:".colorize(:red) + " #{day.min_temp}°"
-        puts "Humidity:".colorize(:red) + " #{day.humidity}%"
-        puts '_____________________'.colorize(:light_black) if index != current_trail.weather.length - 1 
+        if current_trail.weather == []
+            puts ""
+            puts "Weather data unavailable at this time."
+        else 
+            puts ""
+            puts "----------------------------------------".colorize(:light_black)
+            current_trail.weather.each_with_index do |day, index|
+            puts "#{day.day}".colorize(:light_blue)
+            puts ""
+            puts "#{day.description}"
+            puts "High:".colorize(:red) + " #{day.max_temp}°"
+            puts "Low:".colorize(:red) + " #{day.min_temp}°"
+            puts "Humidity:".colorize(:red) + " #{day.humidity}%"
+            puts '_____________________'.colorize(:light_black) if index != current_trail.weather.length - 1 
+            end 
+            puts "----------------------------------------".colorize(:light_black)
         end 
-        puts "----------------------------------------".colorize(:light_black)
         weather_menu 
     end
     
