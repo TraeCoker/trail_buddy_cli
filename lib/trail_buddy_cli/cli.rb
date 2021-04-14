@@ -47,9 +47,11 @@ class CLI
         Scraper.get_data_by_state(state) if !duplicate?(state)
         print_state_trails
     end 
+
+    def duplicate?(state)
+        Trail.all.detect{|trail| trail.state == current_state} ? true : false 
+    end 
         
-
-
     def print_state_trails 
         system "clear"
         puts ""                                                
@@ -80,8 +82,7 @@ class CLI
         elsif input == "exit"
             goodbye
         else 
-            puts ""
-            puts "invalid entry. Please try again."
+            invalid 
             select_trail
         end 
     end 
@@ -89,8 +90,6 @@ class CLI
     def more_trail_info(input)
         system "clear"
         @current_trail = Trail.select_by_state(current_state)[input -1]
-        puts ""             
-        puts ""
         puts "#{current_trail.name}".colorize(:blue) + " - #{current_trail.location}, #{current_state}"
         puts "Length:".colorize(:red) + " #{current_trail.length} - #{current_trail.time_estimate}"
         puts "Difficulty:".colorize(:red) + " #{current_trail.difficulty}"
@@ -127,8 +126,7 @@ class CLI
         elsif input == "exit"
             goodbye
         else 
-            puts ""
-            puts "invalid entry! Please try again."
+            invalid
             menu 
         end 
     end 
@@ -173,18 +171,18 @@ class CLI
         elsif input == "exit"
             goodbye 
         else 
-            puts ""
-            puts "invalid entry! Please try again."
-            menu 
+            invalid
+            weather_menu 
         end 
-    end 
-
-    def duplicate?(state)
-        Trail.all.detect{|trail| trail.state == current_state} ? true : false 
     end 
 
     def user_input 
         gets.strip.downcase
+    end 
+
+    def invalid 
+        puts ""
+        puts "Invalid entry! Please try again."
     end 
 
     def goodbye 
@@ -193,4 +191,5 @@ class CLI
         sleep 2
         system "clear"
     end 
+    
 end 

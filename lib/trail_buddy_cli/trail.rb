@@ -11,6 +11,13 @@ class Trail
         save 
     end 
 
+    def add_additional_attributes(attributes_hash)
+        attributes_hash.each do |key, value|
+            self.class.attr_accessor(key)
+            self.send("#{key}=", value)
+        end 
+    end 
+
     def save 
         @@all << self 
     end 
@@ -21,13 +28,6 @@ class Trail
 
     def self.select_by_state(state)
         all.select{|trail| trail.state == state}
-    end 
-
-    def add_additional_attributes(attributes_hash)
-        attributes_hash.each do |key, value|
-            self.class.attr_accessor(key)
-            self.send("#{key}=", value)
-        end 
     end 
 
     def weather

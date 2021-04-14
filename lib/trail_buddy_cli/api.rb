@@ -46,4 +46,5 @@ class API
     def self.already_retrieved?(trail)
         trail.weather != []
     end 
+    
 end 

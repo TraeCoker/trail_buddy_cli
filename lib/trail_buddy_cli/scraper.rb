@@ -29,6 +29,9 @@ class Scraper
 
     end 
 
+    def self.redirected?(noko)
+        noko.css("body").text.include?("You are being redirected")
+    end 
 
     def self.get_individual_trail_data(trail_link)
         url = URI.parse(trail_link)
@@ -57,8 +60,5 @@ class Scraper
 
         attributes_hash 
     end 
-
-    def self.redirected?(noko)
-        noko.css("body").text.include?("You are being redirected")
-    end 
+    
 end 

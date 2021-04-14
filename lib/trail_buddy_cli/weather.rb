@@ -17,5 +17,5 @@ class Weather
     def self.all 
         @@all 
     end 
-
+    
 end 
